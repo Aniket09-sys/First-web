@@ -10,7 +10,6 @@ Food advertisement
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --charcoal: #1A1A1A;
       --cream: #FFF8F0;
@@ -20,10 +19,8 @@ Food advertisement
       --warm-gray: #8A7E74;
       --off-white: #FAF4ED;
     }
-
     html { scroll-behavior: smooth; }
     body { font-family: 'Lato', sans-serif; background: var(--charcoal); color: var(--cream); overflow-x: hidden; }
-
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -50,7 +47,6 @@ Food advertisement
       font-weight: 700; transition: background 0.2s !important;
     }
     .btn-nav:hover { background: #e0911a !important; }
-
     /* ── HERO ── */
     .hero {
       min-height: 100vh; display: flex; align-items: center;
@@ -124,7 +120,6 @@ Food advertisement
       text-decoration: none; display: inline-block;
     }
     .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-
     /* ── TICKER ── */
     .ticker {
       background: var(--gold); color: var(--charcoal);
@@ -141,7 +136,6 @@ Food advertisement
     }
     .ticker-dot { color: var(--crimson); }
     @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
     /* ── FEATURES ── */
     .features {
       background: var(--off-white); color: var(--charcoal);
@@ -174,7 +168,6 @@ Food advertisement
       font-size: 1.2rem; font-weight: 700; margin-bottom: 0.7rem;
     }
     .feature-text { font-size: 0.92rem; line-height: 1.7; color: #5a5147; }
-
     /* ── MENU SHOWCASE ── */
     .menu-showcase {
       background: var(--charcoal); padding: 7rem 4rem;
@@ -230,7 +223,6 @@ Food advertisement
       cursor: pointer; border-radius: 2px; transition: all 0.2s;
     }
     .btn-order:hover { background: var(--gold); color: var(--charcoal); }
-
     /* ── TESTIMONIAL ── */
     .testimonial {
       background: var(--crimson); padding: 6rem 4rem; text-align: center;
@@ -245,7 +237,6 @@ Food advertisement
       font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;
       opacity: 0.8; font-style: normal;
     }
-
     /* ── CTA SECTION ── */
     .cta-section {
       background: var(--off-white); color: var(--charcoal);
@@ -256,7 +247,6 @@ Food advertisement
       max-width: 480px; margin: 0 auto 2.5rem;
       font-size: 1rem; line-height: 1.75; color: #5a5147;
     }
-
     /* ── FOOTER ── */
     footer {
       background: #0d0d0d; padding: 3rem 4rem;
@@ -268,7 +258,6 @@ Food advertisement
       font-size: 1.3rem; font-style: italic; color: var(--gold);
     }
     footer p { font-size: 0.8rem; color: rgba(255,248,240,0.35); }
-
     /* ── MODAL OVERLAY ── */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 1000;
@@ -344,7 +333,6 @@ Food advertisement
     .msg-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
     .msg-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
     .msg-success.show, .msg-error.show { display: block; }
-
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 1.2rem 1.5rem; }
@@ -520,7 +508,6 @@ Food advertisement
       <div class="modal-body">
         <div class="msg-success" id="msgSuccess">✓ Signed in successfully! Redirecting you now…</div>
         <div class="msg-error" id="msgError">Something went wrong. Please try again.</div>
-
         <div class="form-group">
           <label for="loginEmail">Email Address</label>
           <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email" />
