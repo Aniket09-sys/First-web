@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aniket — Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b1210;
+    --bg-soft: #0f1815;
+    --text: #eef2f0;
+    --text-dim: #9fb0aa;
+    --mint: #6ee7b7;
+    --sky: #60a5fa;
+    --violet: #a78bfa;
+    --line: rgba(238,242,240,0.1);
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  a{ color:inherit; }
+
+  ::selection{ background:var(--mint); color:#0b1210; }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:24px 6vw;
+    backdrop-filter:blur(10px);
+    background:rgba(11,18,16,0.6);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{
+    font-family:var(--mono); font-size:14px; letter-spacing:0.02em;
+    color:var(--mint);
+  }
+  .logo::before{ content:'~/ '; color:var(--text-dim); }
+  .nav-links{ display:flex; gap:32px; list-style:none; }
+  .nav-links a{
+    font-family:var(--mono); font-size:13px; text-decoration:none;
+    color:var(--text-dim); transition:color .25s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{ color:var(--text); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding:0 6vw;
+    overflow:hidden;
+  }
+
+  .aurora{
+    position:absolute; inset:-20%;
+    z-index:0;
+    filter:blur(90px);
+    opacity:0.55;
+  }
+  .aurora span{
+    position:absolute;
+    border-radius:50%;
+    mix-blend-mode:screen;
+  }
+  .aurora span:nth-child(1){
+    width:45vw; height:45vw; top:5%; left:0%;
+    background:var(--mint);
+    animation:drift1 22s ease-in-out infinite;
+  }
+  .aurora span:nth-child(2){
+    width:40vw; height:40vw; top:20%; right:0%;
+    background:var(--sky);
+    animation:drift2 26s ease-in-out infinite;
+  }
+  .aurora span:nth-child(3){
+    width:38vw; height:38vw; bottom:0%; left:25%;
+    background:var(--violet);
+    animation:drift3 30s ease-in-out infinite;
+  }
+
+  @keyframes drift1{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(8vw,10vh) scale(1.15); }
+  }
+  @keyframes drift2{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(-10vw,6vh) scale(0.9); }
+  }
+  @keyframes drift3{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(6vw,-8vh) scale(1.1); }
+  }
+
+  .hero-content{ position:relative; z-index:1; max-width:900px; }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:13px; color:var(--text-dim);
+    display:flex; align-items:center; gap:10px; margin-bottom:24px;
+    opacity:0; animation:fadeUp .8s ease forwards .2s;
+  }
+  .eyebrow .dot{
+    width:7px; height:7px; border-radius:50%; background:var(--mint);
+    box-shadow:0 0 12px var(--mint);
+  }
+
+  h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(2.6rem, 7vw, 5.2rem);
+    line-height:1.05;
+    letter-spacing:-0.02em;
+    opacity:0; animation:fadeUp .9s ease forwards .35s;
+  }
+  h1 .cursor{
+    display:inline-block;
+    width:0.5ch; background:var(--mint); margin-left:6px;
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .hero p.sub{
+    margin-top:22px;
+    max-width:560px;
+    color:var(--text-dim);
+    font-size:1.05rem;
+    opacity:0; animation:fadeUp .9s ease forwards .5s;
+  }
+
+  .hero .actions{
+    margin-top:36px; display:flex; gap:16px;
+    opacity:0; animation:fadeUp .9s ease forwards .65s;
+  }
+
+  .btn{
+    font-family:var(--mono); font-size:13px;
+    padding:13px 24px; border-radius:8px;
+    text-decoration:none;
+    border:1px solid var(--line);
+    transition:all .25s ease;
+  }
+  .btn.primary{
+    background:var(--text); color:var(--bg);
+    border-color:var(--text);
+  }
+  .btn.primary:hover{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(110,231,183,0.25); }
+  .btn.ghost:hover{ border-color:var(--text-dim); background:rgba(255,255,255,0.03); }
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform:translateY(16px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .scroll-cue{
+    position:absolute; bottom:36px; left:6vw;
+    font-family:var(--mono); font-size:12px; color:var(--text-dim);
+    display:flex; align-items:center; gap:10px;
+    z-index:1;
+  }
+  .scroll-cue .line{
+    width:1px; height:32px; background:linear-gradient(var(--mint), transparent);
+    animation:scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine{
+    0%,100%{ opacity:0.3; } 50%{ opacity:1; }
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{
+    padding:120px 6vw;
+    border-top:1px solid var(--line);
+    position:relative;
+  }
+
+  .section-head{
+    display:flex; align-items:baseline; gap:16px; margin-bottom:56px;
+  }
+  .section-head .tag{
+    font-family:var(--mono); font-size:12px; color:var(--mint);
+  }
+  .section-head h2{
+    font-family:var(--display); font-weight:500;
+    font-size:clamp(1.6rem, 3vw, 2.2rem);
+  }
+
+  .reveal{
+    opacity:0; transform:translateY(24px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .reveal.visible{ opacity:1; transform:translateY(0); }
+
+  /* About */
+  .about-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:60px;
+  }
+  .about-grid p{ color:var(--text-dim); font-size:1.05rem; max-width:56ch; }
+  .about-grid p + p{ margin-top:18px; }
+
+  .stack-list{
+    display:flex; flex-direction:column; gap:14px;
+    font-family:var(--mono); font-size:13px;
+  }
+  .stack-list li{
+    display:flex; justify-content:space-between;
+    padding:12px 0; border-bottom:1px solid var(--line);
+    list-style:none; color:var(--text-dim);
+  }
+  .stack-list li span{ color:var(--text); }
+
+  /* Projects */
+  .projects{
+    display:flex; flex-direction:column;
+  }
+  .project{
+    display:grid; grid-template-columns:0.9fr 1.6fr;
+    gap:40px;
+    padding:36px 0;
+    border-bottom:1px solid var(--line);
+    transition:padding-left .3s ease;
+  }
+  .project:hover{ padding-left:12px; }
+  .project:last-child{ border-bottom:none; }
+
+  .project .meta{
+    font-family:var(--mono); font-size:12px; color:var(--text-dim);
+  }
+  .project h3{
+    font-family:var(--display); font-weight:500; font-size:1.35rem;
+    margin-bottom:10px;
+  }
+  .project p{ color:var(--text-dim); max-width:60ch; font-size:0.98rem; }
+  .project .tags{ margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
+  .project .tags span{
+    font-family:var(--mono); font-size:11px; color:var(--sky);
+    border:1px solid rgba(96,165,250,0.3); padding:4px 10px; border-radius:100px;
+  }
+
+  /* Contact */
+  .contact{
+    text-align:left;
+  }
+  .contact h2.big{
+    font-family:var(--display); font-weight:600;
+    font-size:clamp(2rem, 5vw, 3.4rem);
+    max-width:14ch; line-height:1.15; margin-bottom:32px;
+  }
+  .contact .email{
+    display:inline-flex; align-items:center; gap:12px;
+    font-family:var(--mono); font-size:1.1rem;
+    color:var(--mint); text-decoration:none;
+    padding-bottom:4px; border-bottom:1px solid transparent;
+    transition:border-color .25s ease;
+  }
+  .contact .email:hover{ border-color:var(--mint); }
+
+  footer{
+    padding:32px 6vw; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between;
+    font-family:var(--mono); font-size:12px; color:var(--text-dim);
+  }
+
+  @media (max-width:800px){
+    .nav-links{ display:none; }
+    .about-grid, .project{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">aniket</div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="aurora"><span></span><span></span><span></span></div>
+  <div class="hero-content">
+    <div class="eyebrow"><span class="dot"></span> available for projects</div>
+    <h1>I build things<br>from the ground up<span class="cursor">&nbsp;</span></h1>
+    <p class="sub">Developer and tinkerer. I like taking tools apart to see how they work, then rebuilding them — agents, backends, and the odd terminal that shouldn't run half of what I put on it.</p>
+    <div class="actions">
+      <a class="btn primary" href="#projects">See the work</a>
+      <a class="btn ghost" href="#contact">Get in touch</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><div class="line"></div> scroll</div>
+</section>
+
+<section id="about">
+  <div class="section-head reveal">
+    <span class="tag">01</span>
+    <h2>About</h2>
+  </div>
+  <div class="about-grid">
+    <div class="reveal">
+      <p>I spend most of my time in a terminal — usually one running on hardware it wasn't quite designed for. I've built an AI agent from scratch on the Anthropic SDK inside Termux on Android, wired up background execution with tmux, and worked around every RAM and battery constraint that came with it.</p>
+      <p>On the web side, I build clean, fast front ends and the backends behind them — from a minimal portfolio site to an Express API handling contact forms with proper validation and rate limiting. I care about things working reliably, not just looking finished.</p>
+    </div>
+    <ul class="stack-list reveal">
+      <li>Languages <span>Python, JavaScript</span></li>
+      <li>Runtime <span>Node.js, Termux</span></li>
+      <li>Backend <span>Express, Nodemailer</span></li>
+      <li>AI tooling <span>Anthropic SDK</span></li>
+      <li>Hosting <span>Netlify, Vercel, Railway</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-head reveal">
+    <span class="tag">02</span>
+    <h2>Selected projects</h2>
+  </div>
+  <div class="projects">
+    <div class="project reveal">
+      <div class="meta">Personal / ongoing</div>
+      <div>
+        <h3>Termux AI Agent</h3>
+        <p>An autonomous agent built on the Anthropic Python SDK, running entirely on Android via Termux — with tool use, an agentic loop, and background execution over tmux, all constrained to fit a phone's RAM and battery budget.</p>
+        <div class="tags"><span>Python</span><span>Anthropic SDK</span><span>Termux</span></div>
+      </div>
+    </div>
+    <div class="project reveal">
+      <div class="meta">Web</div>
+      <div>
+        <h3>Portfolio site + contact backend</h3>
+        <p>A single-page portfolio with a minimal aesthetic, backed by a Node/Express API that handles the contact form — with Nodemailer delivery, rate limiting, and input validation baked in.</p>
+        <div class="tags"><span>HTML/CSS</span><span>Node.js</span><span>Express</span></div>
+      </div>
+    </div>
+    <div class="project reveal">
+      <div class="meta">Web</div>
+      <div>
+        <h3>Budget build research</h3>
+        <p>Hands-on research into a ₹40,000 gaming PC build centered on a Ryzen 5 5600 and GTX 1650 — balancing part selection against a hard budget ceiling for solid 1080p performance.</p>
+        <div class="tags"><span>Hardware</span><span>Research</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="reveal">
+    <div class="section-head" style="margin-bottom:24px;">
+      <span class="tag">03</span>
+      <h2>Contact</h2>
+    </div>
+    <h2 class="big">Have something worth building? Let's talk.</h2>
+    <a class="email" href="mailto:hello@example.com">hello@example.com ↗</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Aniket</span>
+  <span>built from scratch, naturally</span>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
